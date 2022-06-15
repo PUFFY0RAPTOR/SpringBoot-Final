@@ -43,12 +43,13 @@ public class EncabPedidoController {
         return "formPedidos";
     }
 
-    //@PostMapping("/formPedidos")
+    // @PostMapping("/formPedidos")
     @RequestMapping(value = "/formPedidos", method = RequestMethod.POST)
-    public String guardarPedidos(@Valid EncabPedido encabPedido, BindingResult result, Model model){
-        
-        if(result.hasErrors()){
-            model.addAttribute("titulo", "Formulario de pedidos"); //Sí esto resulta en error, que me muestre el titulo de las cosas y luego guarde.
+    public String guardarPedidos(@Valid EncabPedido encabPedido, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("titulo", "Formulario de pedidos"); // Sí esto resulta en error, que me muestre el titulo
+                                                                   // de las cosas y luego guarde.
         }
 
         encabPedidoService.save(encabPedido);
@@ -56,16 +57,16 @@ public class EncabPedidoController {
     }
 
     @GetMapping("/formPedidos/{idPedido}")
-    public String editarPedidos(@PathVariable Long idPedido, Map<String, Object> model){
-        
+    public String editarPedidos(@PathVariable Long idPedido, Map<String, Object> model) {
+
         EncabPedido encabPedido = null;
 
-        if(idPedido > 0){
+        if (idPedido > 0) {
             encabPedido = encabPedidoService.findOne(idPedido);
-        } else{
+        } else {
             return "redirect:listarPedidos";
         }
-        
+
         model.put("encabPedido", encabPedido);
         model.put("titulo", "Editar pedido");
 
@@ -73,17 +74,17 @@ public class EncabPedidoController {
     }
 
     @GetMapping("/eliminarPedidos/{idPedido}")
-    public String eliminPedidos(@PathVariable Long idPedido){
+    public String eliminPedidos(@PathVariable Long idPedido) {
 
-        if(idPedido > 0)
+        if (idPedido > 0)
             encabPedidoService.delete(idPedido);
 
         return "redirect:/listarPedidos";
     }
 
     @GetMapping("/detallPedido")
-    public String detallPedidos(Model model){
-        
+    public String detallPedidos(Model model) {
+
         model.addAttribute("subTitulo", "Detalles pedidos");
         model.addAttribute("listaDetall", encabPedidoService.findAll());
 

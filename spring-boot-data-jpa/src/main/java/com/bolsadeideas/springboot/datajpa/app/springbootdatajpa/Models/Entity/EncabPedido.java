@@ -67,10 +67,12 @@ public class EncabPedido implements Serializable {
     @NotEmpty
     private String Estado;
 
-    /*@PrePersist // Para decir que la fecha es de hoy
-    public void PrePersist() {
-        Fecha = new Date();
-    }*/
+    /*
+     * @PrePersist // Para decir que la fecha es de hoy
+     * public void PrePersist() {
+     * Fecha = new Date();
+     * }
+     */
 
     public Long getIdPedido() {
         return idPedido;
